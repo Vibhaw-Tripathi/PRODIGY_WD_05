@@ -1,10 +1,10 @@
 // WEATHER APP JAVASCRIPT CODE
 
-// API Configuration
-const API_KEY = '290bb550142a5d09d2f69c05fd9ab9a0'; // Get this from OpenWeatherMap
+
+const API_KEY = 'ADD YOUR API'; // Get this from OpenWeatherMap
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
-// DOM Elements
+
 const cityInput = document.getElementById('cityInput');
 const searchBtn = document.getElementById('searchBtn');
 const locationBtn = document.getElementById('locationBtn');
@@ -12,7 +12,7 @@ const loading = document.getElementById('loading');
 const weatherInfo = document.getElementById('weatherInfo');
 const error = document.getElementById('error');
 
-// Weather Info Elements
+
 const locationEl = document.getElementById('location');
 const weatherIcon = document.getElementById('weatherIcon');
 const temperature = document.getElementById('temperature');
@@ -22,7 +22,7 @@ const humidity = document.getElementById('humidity');
 const windSpeed = document.getElementById('windSpeed');
 const pressure = document.getElementById('pressure');
 
-// Weather Icons Mapping
+
 const weatherIcons = {
     '01d': '☀️', '01n': '🌙',
     '02d': '⛅', '02n': '☁️',
@@ -35,7 +35,7 @@ const weatherIcons = {
     '50d': '🌫️', '50n': '🌫️'
 };
 
-// Event Listeners
+
 searchBtn.addEventListener('click', () => {
     const city = cityInput.value.trim();
     if (city) {
@@ -73,15 +73,14 @@ locationBtn.addEventListener('click', () => {
     }
 });
 
-// API Functions
+
 async function getWeatherByCity(city) {
     showLoading();
     try {
-        // For demo purposes, we'll use mock data since API key is needed
-        // Replace this with actual API call when you have a key
+        
         await simulateAPICall();
         
-        // Mock data for demonstration
+       
         const mockData = {
             name: city,
             sys: { country: 'IN' },
@@ -101,15 +100,7 @@ async function getWeatherByCity(city) {
         
         displayWeatherData(mockData);
         
-        // Uncomment and use this for real API calls:
-        /*
-        const response = await fetch(`${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`);
-        if (!response.ok) {
-            throw new Error('City not found');
-        }
-        const data = await response.json();
-        displayWeatherData(data);
-        */
+        
     } catch (err) {
         hideLoading();
         showError('City not found. Please check the spelling and try again.');
@@ -119,7 +110,7 @@ async function getWeatherByCity(city) {
 
 async function getWeatherByCoords(lat, lon) {
     try {
-        // For demo purposes, using mock data
+        
         await simulateAPICall();
         
         const mockData = {
@@ -141,15 +132,7 @@ async function getWeatherByCoords(lat, lon) {
         
         displayWeatherData(mockData);
         
-        // Uncomment for real API calls:
-        /*
-        const response = await fetch(`${BASE_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
-        if (!response.ok) {
-            throw new Error('Unable to fetch weather data');
-        }
-        const data = await response.json();
-        displayWeatherData(data);
-        */
+        
     } catch (err) {
         hideLoading();
         showError('Unable to fetch weather data for your location.');
@@ -157,26 +140,26 @@ async function getWeatherByCoords(lat, lon) {
     }
 }
 
-// Utility Functions
+
 function displayWeatherData(data) {
     hideLoading();
     hideError();
     
-    // Update weather information
+    
     locationEl.textContent = `${data.name}, ${data.sys.country}`;
     temperature.textContent = `${Math.round(data.main.temp)}°C`;
     description.textContent = data.weather[0].description;
     weatherIcon.textContent = weatherIcons[data.weather[0].icon] || '🌤️';
     
-    // Update weather details
+    
     feelsLike.textContent = `${Math.round(data.main.feels_like)}°C`;
     humidity.textContent = `${data.main.humidity}%`;
     windSpeed.textContent = `${Math.round(data.wind.speed * 3.6)} km/h`;
     pressure.textContent = `${data.main.pressure} hPa`;
     
-    // Add animation class
+    
     weatherInfo.style.animation = 'none';
-    weatherInfo.offsetHeight; // Trigger reflow
+    weatherInfo.offsetHeight; 
     weatherInfo.style.animation = 'fadeIn 1s ease-out';
 }
 
@@ -205,20 +188,20 @@ function hideError() {
 
 function simulateAPICall() {
     return new Promise(resolve => {
-        setTimeout(resolve, 1500); // Simulate network delay
+        setTimeout(resolve, 1500); 
     });
 }
 
-// Initialize the app
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Set initial state
+    
     weatherInfo.style.opacity = '1';
     
-    // Add any additional initialization here
+    
     console.log('Weather App initialized successfully!');
 });
 
-// Additional Helper Functions
+
 function kelvinToCelsius(kelvin) {
     return Math.round(kelvin - 273.15);
 }
@@ -233,7 +216,7 @@ function capitalizeWords(str) {
     });
 }
 
-// Weather condition background changes (optional enhancement)
+
 function updateBackgroundByWeather(weatherMain) {
     const gradients = {
         'Clear': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
